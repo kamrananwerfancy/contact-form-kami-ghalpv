@@ -1,0 +1,119 @@
+<form [formGroup]="profileForm" class="form-container">
+  <mat-card-title>Profile Information</mat-card-title>
+
+  <div class="row">
+    <div class="col-md-6">
+      <mat-form-field class="full-width">
+        <input
+          id="firstName"
+          formControlName="firstName"
+          matInput
+          required
+          placeholder="First name"
+        />
+      </mat-form-field>
+      <mat-hint
+        class="error"
+        *ngIf="profileForm.get ('firstName').touched && profileForm.get ('firstName').errors?.required"
+      >
+        First Name is Required
+      </mat-hint>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field class="full-width">
+        <input formControlName="lastName" matInput placeholder="Last name" />
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Select Birth Country</mat-label>
+        <mat-select formControlName="country" [(value)]="selected">
+          <mat-option>None</mat-option>
+          <mat-option value="Pakistan">Pakistan</mat-option>
+          <mat-option value="USA">USA</mat-option>
+          <mat-option value="Canada">Canada</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-hint
+        class="error"
+        *ngIf="profileForm.get ('country').touched && profileForm.get ('country').errors?.required"
+      >
+        Country is Required
+      </mat-hint>
+    </div>
+    <div class="col-md-6 top-padding">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Select DOB</mat-label>
+        <input
+          formControlName="dob"
+          matInput
+          [matDatepicker]="picker"
+          required
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-hint
+        class="error"
+        *ngIf="profileForm.get ('dob').touched && profileForm.get ('dob').errors?.required"
+      >
+        Date Of Birth is Required
+      </mat-hint>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <mat-form-field class="full-width">
+        <input formControlName="address" matInput placeholder="Address" />
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">
+      <mat-radio-group formControlName="gender" required class="margin-left">
+        <mat-radio-button value="male"> Male </mat-radio-button>
+        <mat-radio-button value="female"> Female </mat-radio-button>
+      </mat-radio-group>
+      <mat-hint
+        class="error"
+        *ngIf="profileForm.get ('gender').touched && profileForm.get ('gender').errors?.required"
+      >
+        Gender selection Required
+      </mat-hint>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <span
+        >I Have Read All
+        <strong>
+          <a
+            class="underline"
+            target="blank"
+            href="https://www.termsandcondiitionssample.com/"
+            >Terms</a
+          >
+        </strong>
+        &
+        <strong>
+          <a
+            class="underline"
+            target="blank"
+            href="https://www.termsandcondiitionssample.com/"
+            >Condition</a
+          ></strong
+        ></span
+      >
+      <mat-checkbox required formControlName="permission"></mat-checkbox>
+    </div>
+  </div>
+  <br />
+  <button
+    (click)="saveForm()"
+    mat-raised-button
+    color="primary"
+    [disabled]="!profileForm.valid"
+  >
+    Submit
+  </button>
+</form>
